@@ -1,0 +1,43 @@
+﻿
+
+
+@model MVC_New.Models.CurrencyViewModel
+
+@{
+    ViewData["Title"] = "Currency";
+}
+
+<h1>Currency Conversion</h1>
+
+<style>
+    .text-danger {
+        color: #e74c3c;
+    }
+</style>
+
+@using (Html.BeginForm("Currency", "Home", FormMethod.Post))
+{
+
+    <div>
+        @Html.LabelFor(x => x.Amount)
+        @Html.TextBoxFor(x => x.Amount)
+        @Html.ValidationMessageFor(x => x.Amount, "", new { @class = "text-danger" })
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Currency)
+        
+        @Html.DropDownList("Currency", new List<SelectListItem>
+        {
+        new SelectListItem{ Text="USD", Value = "USD"  },
+        new SelectListItem{ Text="AUD", Value = "AUD" },
+        new SelectListItem{ Text="EUR", Value = "EUR" }
+        }, "-Please select-")
+        @Html.ValidationMessageFor(model => model.Currency ,"", new { @class = "text-danger" })
+    </div>
+
+
+    <button type="submit">Send</button>
+
+}
+
